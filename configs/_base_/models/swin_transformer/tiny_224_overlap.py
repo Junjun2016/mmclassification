@@ -14,7 +14,7 @@ model = dict(
             dict(downsample_cfg=dict(kernel_size=3, stride=2, padding=1)),
             dict(downsample_cfg=dict(kernel_size=3, stride=2, padding=1)),
             dict(downsample_cfg=dict(kernel_size=3, stride=2, padding=1)),
-            dict(downsample_cfg=dict(kernel_size=7, stride=4, padding=3))
+            dict(downsample_cfg=dict(kernel_size=3, stride=2, padding=1))
         ]),
     neck=dict(type='GlobalAveragePooling', dim=1),
     head=dict(
