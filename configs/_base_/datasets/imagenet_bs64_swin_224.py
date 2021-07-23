@@ -60,7 +60,14 @@ policies = [
 ]
 
 train_pipeline = [
-    dict(type='LoadImageFromFile'),
+    dict(
+        type='LoadImageFromFile',
+        file_client_args=dict(
+            backend='memcached',
+            server_list_cfg=\
+            '/mnt/lustre/share/memcached_client/server_list.conf', # noqa
+            client_cfg='/mnt/lustre/share/memcached_client/client.conf',
+            sys_path='/mnt/lustre/share/pymc/py3')),
     dict(
         type='RandomResizedCrop',
         size=224,
@@ -89,7 +96,14 @@ train_pipeline = [
 ]
 
 test_pipeline = [
-    dict(type='LoadImageFromFile'),
+    dict(
+        type='LoadImageFromFile',
+        file_client_args=dict(
+            backend='memcached',
+            server_list_cfg=\
+            '/mnt/lustre/share/memcached_client/server_list.conf', # noqa
+            client_cfg='/mnt/lustre/share/memcached_client/client.conf',
+            sys_path='/mnt/lustre/share/pymc/py3')),
     dict(
         type='Resize',
         size=(256, -1),

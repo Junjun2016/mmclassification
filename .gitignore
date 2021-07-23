@@ -115,3 +115,9 @@ work_dirs/
 
 # Pytorch
 *.pth
+
+# history
+.history
+
+# my_tools
+my_tools/

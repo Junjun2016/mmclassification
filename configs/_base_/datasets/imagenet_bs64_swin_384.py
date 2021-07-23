@@ -3,7 +3,14 @@ dataset_type = 'ImageNet'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 train_pipeline = [
-    dict(type='LoadImageFromFile'),
+    dict(
+        type='LoadImageFromFile',
+        file_client_args=dict(
+            backend='memcached',
+            server_list_cfg=\
+            '/mnt/lustre/share/memcached_client/server_list.conf', # noqa
+            client_cfg='/mnt/lustre/share/memcached_client/client.conf',
+            sys_path='/mnt/lustre/share/pymc/py3')),
     dict(
         type='RandomResizedCrop',
         size=384,
@@ -16,7 +23,14 @@ train_pipeline = [
     dict(type='Collect', keys=['img', 'gt_label'])
 ]
 test_pipeline = [
-    dict(type='LoadImageFromFile'),
+    dict(
+        type='LoadImageFromFile',
+        file_client_args=dict(
+            backend='memcached',
+            server_list_cfg=\
+            '/mnt/lustre/share/memcached_client/server_list.conf', # noqa
+            client_cfg='/mnt/lustre/share/memcached_client/client.conf',
+            sys_path='/mnt/lustre/share/pymc/py3')),
     dict(type='Resize', size=384, backend='pillow', interpolation='bicubic'),
     dict(type='Normalize', **img_norm_cfg),
     dict(type='ImageToTensor', keys=['img']),
